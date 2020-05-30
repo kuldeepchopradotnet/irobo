@@ -85,9 +85,9 @@ $(document).ready(function () {
                                 '<tr><td>New Confirmed</td><td>' + globalCovid.NewConfirmed.toString() + '</td></tr>' +
                                 '<tr><td>New Deaths</td><td>' + globalCovid.NewDeaths + '</td></tr>' +
                                 '<tr><td>New Recovered</td><td>' + globalCovid.NewRecovered + '</td></tr>' +
-                                '<tr><td>Total Confirmed</td><td>' + globalCovid.TotalConfirmed + '</td></tr>' +
-                                '<tr><td>Total Deaths</td><td>' + globalCovid.TotalDeaths + '</td></tr>' +
-                                '<tr><td>Total Recovered</td><td>' + globalCovid.TotalRecovered + '</td></tr></table>';
+                                '<tr><td>Total Confirmed</td><td class="confirmed">' + globalCovid.TotalConfirmed + '</td></tr>' +
+                                '<tr><td>Total Deaths</td><td td class="deaths">' + globalCovid.TotalDeaths + '</td></tr>' +
+                                '<tr><td>Total Recovered</td><td class="recoverd">' + globalCovid.TotalRecovered + '</td></tr></table>';
                             countryTable.html(countryTableHtml);
                         }
                     } else {
@@ -95,13 +95,13 @@ $(document).ready(function () {
                         selCountry = selCountry ? selCountry[0] : null;
                         if (selCountry) {
                             var countryTableHtml = '<table><tr><td>Date</td><td>' + (formatAMPM(new Date(selCountry.Date))) + '</td></tr>' +
-                                '<tr><td>Country</td><td>' + selCountry.Country + '</td></tr>' +
+                                '<tr><td>Country</td><td class="country">' + selCountry.Country + '</td></tr>' +
                                 '<tr><td>New Confirmed</td><td>' + selCountry.NewConfirmed.toString() + '</td></tr>' +
                                 '<tr><td>New Deaths</td><td>' + selCountry.NewDeaths + '</td></tr>' +
                                 '<tr><td>New Recovered</td><td>' + selCountry.NewRecovered + '</td></tr>' +
-                                '<tr><td>Total Confirmed</td><td>' + selCountry.TotalConfirmed + '</td></tr>' +
-                                '<tr><td>Total Deaths</td><td>' + selCountry.TotalDeaths + '</td></tr>' +
-                                '<tr><td>Total Recovered</td><td>' + selCountry.TotalRecovered + '</td></tr></table>';
+                                '<tr><td>Total Confirmed</td><td class="confirmed">' + selCountry.TotalConfirmed + '</td></tr>' +
+                                '<tr><td>Total Deaths</td><td class="deaths">' + selCountry.TotalDeaths + '</td></tr>' +
+                                '<tr><td>Total Recovered</td><td class="recoverd">' + selCountry.TotalRecovered + '</td></tr></table>';
                             countryTable.html(countryTableHtml);
                         }
                     }
