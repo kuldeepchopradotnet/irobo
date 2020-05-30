@@ -70,10 +70,13 @@ li.token-input-input-token-facebook {
     list-style-type: none;
 }
 
+input#token-input-CountryDD {
+    color: #5670a6;
+}
+
 div.token-input-dropdown-facebook {
     position: absolute;
     /* width: 400px; */
-    width: 80%;
     background-color: #fff;
     overflow: hidden;
     border-left: 1px solid #ccc;
