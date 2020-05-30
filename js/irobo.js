@@ -26,7 +26,8 @@ $(document).ready(function () {
             IpComponent();
             break;
         case 2:
-            CovidComponent();
+            var helper = helper();
+            CovidComponent(helper);
             break;
         case 3:
             break
@@ -42,7 +43,7 @@ $(document).ready(function () {
      */
     function IpComponent() {
         var html = '<h3>Your ip address is : {ip}<h3>';
-        $.getJSON('https://api.ipify.org?format=json', function (data) {
+        $.getJSON(helper.constants.apis.ip, function (data) {
             html = html.replace('{ip}', (data.ip ? data.ip : ''));
             postBody.html(html);
         });
@@ -50,12 +51,13 @@ $(document).ready(function () {
 
     /**
      * covidUpdate component
+     * helper dependancy
      */
-    function CovidComponent() {
+    function CovidComponent(helper) {
         /**
          * Get CovidData
          */
-        $.getJSON('https://api.covid19api.com/summary', function (data) {
+        $.getJSON(helper.constants.apis.covid, function (data) {
             var covid = data;
             var countryCovid = covid["Countries"];
             var globalCovid = covid["Global"];
@@ -71,7 +73,8 @@ $(document).ready(function () {
              * Get View of CovidByCountry
              * @param {countryName} val 
              */
-            function getCountryView(val) {
+            var getCountryView = function (val) {
+                val = val ? val.name : '';
                 if (!val) {
                     if (globalCovid) {
                         var countryTableHtml = '<table><tr><td>Date</td><td>' + (formatAMPM(new Date(covid.Date))) + '</td></tr>' +
@@ -115,7 +118,7 @@ $(document).ready(function () {
                     countryCovid.forEach(function (country) {
                         countryList.push({ id: country.Country, name: country.Country });
                     });
-                    PlugTokenInput("CountryDD", countryList);
+                    helper.PlugTokenInput("CountryDD", countryList, getCountryView);
                 } else {
                     return null;
                 }
@@ -132,7 +135,7 @@ $(document).ready(function () {
                 });
             }
         }).fail(function () {
-            CovidComponent();
+            CovidComponent(helper);
         });
     }
     /*All common function listed here*/
@@ -143,10 +146,10 @@ $(document).ready(function () {
      */
     function getPageNumber(pageTitle) {
         var pageNumber = 0;
-        pagetbl.filter(function (e) {
+        pagetbl.some(function (e) {
             if (e && e.pageName.toLocaleLowerCase() === pageTitle.toLocaleLowerCase()) {
                 pageNumner = e.pageNumner;
-                return;
+                return true;
             }
         });
         return pageNumner;
@@ -167,44 +170,46 @@ $(document).ready(function () {
     }
 
     /**
-     * Plugin's methods
+     * Plugin's methods and helper function
      */
+    function helper() {
+        return {
+            /**
+             * plug tokeninput jquery when data loaded
+             */
+            PlugTokenInput: function (inputNameId, data, cbItem) {
+                $("#" + inputNameId).tokenInput(data, {
+                    tokenLimit: 1,
+                    theme: "facebook",
+                    onAdd: function (item) {
+                        cbItem(item);
+                    },
+                    onDelete: function (item) {
 
-    /**
-     * plug tokeninput jquery when data loaded
-     */
-    function PlugTokenInput(inputNameId, data) {
-        $("#" + inputNameId).tokenInput(data, {
-            tokenLimit: 1,
-            theme: "facebook",
-            onAdd: function (item) {
-                if (validateDataObj(item.name)) {
-                    handleTokenInput(item.name);
-                }
+                    }
+                });
             },
-            onDelete: function (item) {
-
-            }
-        });
-    }
-    /**
-     * handle result of tooken input
-     * @param {item of token input} item 
-     */
-    function handleTokenInput(item) {
-        getCountryView(item.name);
-    }
-    /**
-     * validate data is correct
-     * @param {data} data 
-     */
-    function validateDataObj(data) {
-        if (typeof data === 'string') {
-            if (data != null && data != undefined && data != '') {
-                return true;
+            /**
+             * validate data is correct
+             * @param {data} data 
+             */
+            validateDataObj: function (data) {
+                if (typeof data === 'string') {
+                    if (data != null && data != undefined && data != '') {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            /**
+             * helper constants
+             */
+            constants: {
+                apis: {
+                    covid: 'https://api.covid19api.com/summary',
+                    ip : 'https://api.ipify.org?format=json'
+                }
             }
         }
-        return false;
     }
-
 });
