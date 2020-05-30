@@ -112,10 +112,10 @@ $(document).ready(function () {
                     // return countryDDHtml;
 
                     var countryList = [];
-                    // countryCovid.forEach(function (country) {
-                    //     countryList.push
-                    // });
-                    PlugTokenInput("CountryDD", countryCovid);
+                    countryCovid.forEach(function (country) {
+                        countryList.push(country.Country);
+                    });
+                    PlugTokenInput("CountryDD", countryList);
                 } else {
                     return null;
                 }
