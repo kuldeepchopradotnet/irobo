@@ -59,13 +59,13 @@ $(document).ready(function () {
          */
         $.getJSON(helper.constants.apis.covid, function (data) {
             var covid = data;
+            var getCountryViewO = getCountryView();
             var countryCovid = covid["Countries"];
             var globalCovid = covid["Global"];
             var CountryDomE = $("#CountryDD");
             var countryTable = $("#CountryTable");
             var availableCountry = getAvailableCounty(countryCovid);
             CountryDomE.append(availableCountry);
-            var getCountryViewO = getCountryView();
             getCountryViewO('');
             CountryDomE.change(function () {
                 getCountryView($(this).val());
