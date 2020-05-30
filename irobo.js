@@ -113,7 +113,7 @@ $(document).ready(function () {
 
                     var countryList = [];
                     countryCovid.forEach(function (country) {
-                        countryList.push(country.Country);
+                        countryList.push({id: country.Country, name: country.Country});
                     });
                     PlugTokenInput("CountryDD", countryList);
                 } else {
