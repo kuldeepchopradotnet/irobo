@@ -76,6 +76,7 @@ $(document).ready(function () {
              */
             function getCountryView() {
                 return function (val) {
+                    helper.clearTokenInput(helper.constants.SelectorIds.covidTokenInput,helper.constants.events.clear);
                     val = val ? val.name : '';
                     if (!val) {
                         if (globalCovid) {
@@ -121,7 +122,7 @@ $(document).ready(function () {
                     countryCovid.forEach(function (country) {
                         countryList.push({ id: country.Country, name: country.Country });
                     });
-                    helper.PlugTokenInput("CountryDD", countryList, getCountryViewO);
+                    helper.PlugTokenInput(helper.constants.SelectorIds.covidTokenInput, countryList, getCountryViewO);
                 } else {
                     return null;
                 }
@@ -181,7 +182,7 @@ $(document).ready(function () {
              * plug tokeninput jquery when data loaded
              */
             PlugTokenInput: function (inputNameId, data, cbItem) {
-                $("#" + inputNameId).tokenInput(data, {
+                $(inputNameId).tokenInput(data, {
                     tokenLimit: 1,
                     theme: "facebook",
                     onAdd: function (item) {
@@ -191,6 +192,9 @@ $(document).ready(function () {
 
                     }
                 });
+            },
+            clearTokenInput: function(inputNameId,event){
+                $(inputNameId).tokenInput(event);
             },
             /**
              * validate data is correct
@@ -211,6 +215,12 @@ $(document).ready(function () {
                 apis: {
                     covid: 'https://api.covid19api.com/summary',
                     ip: 'https://api.ipify.org?format=json'
+                },
+                SelectorIds:{
+                    covidTokenInput: '#CountryDD'
+                },
+                events:{
+                    clear: 'clear'
                 }
             }
         }
