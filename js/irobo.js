@@ -76,8 +76,8 @@ $(document).ready(function () {
              */
             function getCountryView() {
                 return function (val) {
-                    helper.clearTokenInput(helper.constants.Selectors.covidTokenInput,helper.constants.events.clear);
-                    helper.AddCss(helper.constants.events.Selectors.inputTokenResult,helper.constants.events.display,helper.constants.events.none);
+                    helper.clearTokenInput(helper.constants.selectors.covidTokenInput,helper.constants.events.clear);
+                    helper.addCss(helper.constants.selectors.inputTokenResult,helper.constants.events.display,helper.constants.events.none);
                     val = val ? val.name : '';
                     if (!val) {
                         if (globalCovid) {
@@ -123,7 +123,7 @@ $(document).ready(function () {
                     countryCovid.forEach(function (country) {
                         countryList.push({ id: country.Country, name: country.Country });
                     });
-                    helper.PlugTokenInput(helper.constants.Selectors.covidTokenInput, countryList, getCountryViewO);
+                    helper.plugTokenInput(helper.constants.selectors.covidTokenInput, countryList, getCountryViewO);
                 } else {
                     return null;
                 }
@@ -182,7 +182,7 @@ $(document).ready(function () {
             /**
              * plug tokeninput jquery when data loaded
              */
-            PlugTokenInput: function (inputNameId, data, cbItem) {
+            plugTokenInput: function (inputNameId, data, cbItem) {
                 $(inputNameId).tokenInput(data, {
                     tokenLimit: 1,
                     theme: "facebook",
@@ -208,7 +208,7 @@ $(document).ready(function () {
              * @param {*} key 
              * @param {*} value 
              */           
-            AddCss: function(selector,key,value){
+            addCss: function(selector,key,value){
                 $(selector).css(key,value)
             },
             /**
@@ -231,7 +231,7 @@ $(document).ready(function () {
                     covid: 'https://api.covid19api.com/summary',
                     ip: 'https://api.ipify.org?format=json'
                 },
-                Selectors:{
+                selectors:{
                     covidTokenInput: '#CountryDD',
                     inputTokenResult: '.token-input-dropdown-facebook'
                 },
