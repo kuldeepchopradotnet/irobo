@@ -76,7 +76,8 @@ $(document).ready(function () {
              */
             function getCountryView() {
                 return function (val) {
-                    helper.clearTokenInput(helper.constants.SelectorIds.covidTokenInput,helper.constants.events.clear);
+                    helper.clearTokenInput(helper.constants.Selectors.covidTokenInput,helper.constants.events.clear);
+                    helper.AddCss(helper.constants.events.Selectors.inputTokenResult,helper.constants.events.display,helper.constants.events.none);
                     val = val ? val.name : '';
                     if (!val) {
                         if (globalCovid) {
@@ -122,7 +123,7 @@ $(document).ready(function () {
                     countryCovid.forEach(function (country) {
                         countryList.push({ id: country.Country, name: country.Country });
                     });
-                    helper.PlugTokenInput(helper.constants.SelectorIds.covidTokenInput, countryList, getCountryViewO);
+                    helper.PlugTokenInput(helper.constants.Selectors.covidTokenInput, countryList, getCountryViewO);
                 } else {
                     return null;
                 }
@@ -193,8 +194,22 @@ $(document).ready(function () {
                     }
                 });
             },
+            /**
+             * Clear input box of token input
+             * @param {*} inputNameId 
+             * @param {*} event 
+             */
             clearTokenInput: function(inputNameId,event){
                 $(inputNameId).tokenInput(event);
+            }, 
+            /**
+             * Add css to element
+             * @param {*} selector 
+             * @param {*} key 
+             * @param {*} value 
+             */           
+            AddCss: function(selector,key,value){
+                $(selector).css(key,value)
             },
             /**
              * validate data is correct
@@ -216,11 +231,14 @@ $(document).ready(function () {
                     covid: 'https://api.covid19api.com/summary',
                     ip: 'https://api.ipify.org?format=json'
                 },
-                SelectorIds:{
-                    covidTokenInput: '#CountryDD'
+                Selectors:{
+                    covidTokenInput: '#CountryDD',
+                    inputTokenResult: '.token-input-dropdown-facebook'
                 },
                 events:{
-                    clear: 'clear'
+                    clear: 'clear',
+                    display: 'display',
+                    none: 'none'
                 }
             }
         }
