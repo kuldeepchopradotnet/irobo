@@ -113,7 +113,7 @@ $(document).ready(function () {
 
                     var countryList = [];
                     countryCovid.forEach(function (country) {
-                        countryList.push({id: country.Country, name: country.Country});
+                        countryList.push({ id: country.Country, name: country.Country });
                     });
                     PlugTokenInput("CountryDD", countryList);
                 } else {
@@ -175,14 +175,36 @@ $(document).ready(function () {
      */
     function PlugTokenInput(inputNameId, data) {
         $("#" + inputNameId).tokenInput(data, {
+            tokenLimit: 1,
+            theme: "facebook",
             onAdd: function (item) {
-                alert("Added " + item.name);
+                if (validateDataObj(item.name)) {
+                    handleTokenInput(item.name);
+                }
             },
             onDelete: function (item) {
-                alert("Deleted " + item.name);
-            },
-            tokenLimit: 1
+
+            }
         });
+    }
+    /**
+     * handle result of tooken input
+     * @param {item of token input} item 
+     */
+    function handleTokenInput(item) {
+        getCountryView(item.name);
+    }
+    /**
+     * validate data is correct
+     * @param {data} data 
+     */
+    function validateDataObj(data) {
+        if (typeof data === 'string') {
+            if (data != null && data != undefined && data != '') {
+                return true;
+            }
+        }
+        return false;
     }
 
 });
