@@ -73,7 +73,7 @@ div.token-input-dropdown {
     cursor: default;
     font-size: 12px;
     font-family: Verdana;
-    z-index: 99;
+    z-index: 999;
 }
 
 div.token-input-dropdown p {
