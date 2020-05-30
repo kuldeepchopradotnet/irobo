@@ -65,7 +65,8 @@ $(document).ready(function () {
             var countryTable = $("#CountryTable");
             var availableCountry = getAvailableCounty(countryCovid);
             CountryDomE.append(availableCountry);
-            getCountryView('');
+            var getCountryViewO = getCountryView();
+            getCountryViewO('');
             CountryDomE.change(function () {
                 getCountryView($(this).val());
             });
@@ -73,32 +74,34 @@ $(document).ready(function () {
              * Get View of CovidByCountry
              * @param {countryName} val 
              */
-            var getCountryView = function (val) {
-                val = val ? val.name : '';
-                if (!val) {
-                    if (globalCovid) {
-                        var countryTableHtml = '<table><tr><td>Date</td><td>' + (formatAMPM(new Date(covid.Date))) + '</td></tr>' +
-                            '<tr><td>New Confirmed</td><td>' + globalCovid.NewConfirmed.toString() + '</td></tr>' +
-                            '<tr><td>New Deaths</td><td>' + globalCovid.NewDeaths + '</td></tr>' +
-                            '<tr><td>New Recovered</td><td>' + globalCovid.NewRecovered + '</td></tr>' +
-                            '<tr><td>Total Confirmed</td><td>' + globalCovid.TotalConfirmed + '</td></tr>' +
-                            '<tr><td>Total Deaths</td><td>' + globalCovid.TotalDeaths + '</td></tr>' +
-                            '<tr><td>Total Recovered</td><td>' + globalCovid.TotalRecovered + '</td></tr></table>';
-                        countryTable.html(countryTableHtml);
-                    }
-                } else {
-                    var selCountry = getCovidByCountry(val);
-                    selCountry = selCountry ? selCountry[0] : null;
-                    if (selCountry) {
-                        var countryTableHtml = '<table><tr><td>Date</td><td>' + (formatAMPM(new Date(selCountry.Date))) + '</td></tr>' +
-                            '<tr><td>Country</td><td>' + selCountry.Country + '</td></tr>' +
-                            '<tr><td>New Confirmed</td><td>' + selCountry.NewConfirmed.toString() + '</td></tr>' +
-                            '<tr><td>New Deaths</td><td>' + selCountry.NewDeaths + '</td></tr>' +
-                            '<tr><td>New Recovered</td><td>' + selCountry.NewRecovered + '</td></tr>' +
-                            '<tr><td>Total Confirmed</td><td>' + selCountry.TotalConfirmed + '</td></tr>' +
-                            '<tr><td>Total Deaths</td><td>' + selCountry.TotalDeaths + '</td></tr>' +
-                            '<tr><td>Total Recovered</td><td>' + selCountry.TotalRecovered + '</td></tr></table>';
-                        countryTable.html(countryTableHtml);
+            function getCountryView() {
+                return function (val) {
+                    val = val ? val.name : '';
+                    if (!val) {
+                        if (globalCovid) {
+                            var countryTableHtml = '<table><tr><td>Date</td><td>' + (formatAMPM(new Date(covid.Date))) + '</td></tr>' +
+                                '<tr><td>New Confirmed</td><td>' + globalCovid.NewConfirmed.toString() + '</td></tr>' +
+                                '<tr><td>New Deaths</td><td>' + globalCovid.NewDeaths + '</td></tr>' +
+                                '<tr><td>New Recovered</td><td>' + globalCovid.NewRecovered + '</td></tr>' +
+                                '<tr><td>Total Confirmed</td><td>' + globalCovid.TotalConfirmed + '</td></tr>' +
+                                '<tr><td>Total Deaths</td><td>' + globalCovid.TotalDeaths + '</td></tr>' +
+                                '<tr><td>Total Recovered</td><td>' + globalCovid.TotalRecovered + '</td></tr></table>';
+                            countryTable.html(countryTableHtml);
+                        }
+                    } else {
+                        var selCountry = getCovidByCountry(val);
+                        selCountry = selCountry ? selCountry[0] : null;
+                        if (selCountry) {
+                            var countryTableHtml = '<table><tr><td>Date</td><td>' + (formatAMPM(new Date(selCountry.Date))) + '</td></tr>' +
+                                '<tr><td>Country</td><td>' + selCountry.Country + '</td></tr>' +
+                                '<tr><td>New Confirmed</td><td>' + selCountry.NewConfirmed.toString() + '</td></tr>' +
+                                '<tr><td>New Deaths</td><td>' + selCountry.NewDeaths + '</td></tr>' +
+                                '<tr><td>New Recovered</td><td>' + selCountry.NewRecovered + '</td></tr>' +
+                                '<tr><td>Total Confirmed</td><td>' + selCountry.TotalConfirmed + '</td></tr>' +
+                                '<tr><td>Total Deaths</td><td>' + selCountry.TotalDeaths + '</td></tr>' +
+                                '<tr><td>Total Recovered</td><td>' + selCountry.TotalRecovered + '</td></tr></table>';
+                            countryTable.html(countryTableHtml);
+                        }
                     }
                 }
             }
@@ -118,7 +121,7 @@ $(document).ready(function () {
                     countryCovid.forEach(function (country) {
                         countryList.push({ id: country.Country, name: country.Country });
                     });
-                    helper.PlugTokenInput("CountryDD", countryList, getCountryView);
+                    helper.PlugTokenInput("CountryDD", countryList, getCountryViewO);
                 } else {
                     return null;
                 }
@@ -207,7 +210,7 @@ $(document).ready(function () {
             constants: {
                 apis: {
                     covid: 'https://api.covid19api.com/summary',
-                    ip : 'https://api.ipify.org?format=json'
+                    ip: 'https://api.ipify.org?format=json'
                 }
             }
         }
