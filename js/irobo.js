@@ -90,14 +90,14 @@ $(document).ready(function() {
                     }
                     if (countryO) {
                         var dicObj = {
-                            "{newDeath}": selCountry.NewDeaths,
-                            "{NewConfirmed}": selCountry.NewConfirmed,
-                            "{TotalRecovered}": selCountry.TotalRecovered,
-                            "{countryName}": selCountry.Country,
-                            "{countryDate}": (formatAMPM(new Date(selCountry.Date))),
-                            "{totalDeath}": selCountry.TotalDeaths,
-                            "{NewRecovered}": selCountry.NewRecovered,
-                            "{TotalConfirmed}": selCountry.TotalConfirmed,
+                            "{newDeath}": countryO.NewDeaths,
+                            "{NewConfirmed}": countryO.NewConfirmed,
+                            "{TotalRecovered}": countryO.TotalRecovered,
+                            "{countryName}": countryO.Country,
+                            "{countryDate}": (formatAMPM(new Date(countryO.Date))),
+                            "{totalDeath}": countryO.TotalDeaths,
+                            "{NewRecovered}": countryO.NewRecovered,
+                            "{TotalConfirmed}": countryO.TotalConfirmed,
                         }
                         var htmlStr = helper.getHtmlView("#covid-view");
                         var newHtmStr = helper.dictinory(dicObj, htmlStr);
