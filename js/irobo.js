@@ -65,14 +65,8 @@ $(document).ready(function() {
             var getCountryViewO = getCountryView();
             var countryCovid = covid["Countries"];
             var globalCovid = covid["Global"];
-            var CountryDomE = $("#CountryDD");
-            var countryTable = $("#CountryTable");
-            var availableCountry = getAvailableCounty(countryCovid);
-            CountryDomE.append(availableCountry);
+            getAvailableCounty(countryCovid);
             getCountryViewO('');
-            CountryDomE.change(function() {
-                getCountryView($(this).val());
-            });
             /**
              * Get View of CovidByCountry
              * @param {countryName} val 
@@ -119,8 +113,6 @@ $(document).ready(function() {
                         countryList.push({ id: country.Country, name: country.Country });
                     });
                     helper.plugTokenInput(helper.constants.selectors.covidTokenInput, countryList, getCountryViewO);
-                } else {
-                    return null;
                 }
             }
             /**
