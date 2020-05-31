@@ -58,7 +58,9 @@ $(document).ready(function() {
         /**
          * Get CovidData
          */
+        helper.loader(helper.constants.toggle.on);
         $.getJSON(helper.constants.apis.covid, function(data) {
+            helper.loader(helper.constants.toggle.off);
             var covid = data;
             var getCountryViewO = getCountryView();
             var countryCovid = covid["Countries"];
@@ -224,7 +226,6 @@ $(document).ready(function() {
             },
 
             dictinory: function(dicArr, str) {
-
                 var re = new RegExp(Object.keys(dicArr).join("|"), "ig");
                 return str.replace(re, function(m) {
                     return dicArr[m];
@@ -238,6 +239,12 @@ $(document).ready(function() {
             setHtmlView: function(selector, html) {
                 return $(selector).html(html);
             },
+
+            loader: function(toggle) {
+                toggle === 'on' ?
+                    addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.block) :
+                    addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.none);
+            },
             /**
              * helper constants
              */
@@ -248,12 +255,18 @@ $(document).ready(function() {
                 },
                 selectors: {
                     covidTokenInput: '#CountryDD',
-                    inputTokenResult: '.token-input-dropdown-facebook'
+                    inputTokenResult: '.token-input-dropdown-facebook',
+                    loader: '#loader-grow'
                 },
                 events: {
                     clear: 'clear',
                     display: 'display',
-                    none: 'none'
+                    none: 'none',
+                    block: 'block'
+                },
+                toggle: {
+                    on: "on",
+                    off: "off"
                 }
             }
         }
