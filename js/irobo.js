@@ -114,12 +114,6 @@ $(document).ready(function() {
              */
             function getAvailableCounty(countryCovid) {
                 if (countryCovid && countryCovid.length > 0) {
-                    // var countryDDHtml = "";
-                    // countryCovid.forEach(function (country) {
-                    //     countryDDHtml += '<option value="' + country.Country + '">' + country.Country + '</option>';
-                    // });
-                    // return countryDDHtml;
-
                     var countryList = [];
                     countryCovid.forEach(function(country) {
                         countryList.push({ id: country.Country, name: country.Country });
