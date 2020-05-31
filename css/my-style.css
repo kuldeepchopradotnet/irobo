@@ -1,4 +1,4 @@
-.country {
+/* .country {
     color: #d7ca54;
 }
 
@@ -50,7 +50,7 @@ td {
 
 tr:nth-child(even) {
     background-color: #03897d;
-}
+} */
 
 select#CountryDD {
     color: black;

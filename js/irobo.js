@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
     /**
      * Page title
      */
@@ -11,13 +11,14 @@ $(document).ready(function () {
      * start
      */
     var pagetbl = [{
-        pageName: 'what is my ip address',
-        pageNumner: 1
-    },
-    {
-        pageName: 'covid-19 update',
-        pageNumner: 2
-    }];
+            pageName: 'what is my ip address',
+            pageNumner: 1
+        },
+        {
+            pageName: 'covid-19 update',
+            pageNumner: 2
+        }
+    ];
 
     var pageNumner = getPageNumber(pageTitle);
     postBody = pageNumner > 0 ? $(".post-body.entry-content") : '';
@@ -43,7 +44,7 @@ $(document).ready(function () {
      */
     function IpComponent() {
         var html = '<h3>Your ip address is : {ip}<h3>';
-        $.getJSON(helper.constants.apis.ip, function (data) {
+        $.getJSON(helper.constants.apis.ip, function(data) {
             html = html.replace('{ip}', (data.ip ? data.ip : ''));
             postBody.html(html);
         });
@@ -57,7 +58,7 @@ $(document).ready(function () {
         /**
          * Get CovidData
          */
-        $.getJSON(helper.constants.apis.covid, function (data) {
+        $.getJSON(helper.constants.apis.covid, function(data) {
             var covid = data;
             var getCountryViewO = getCountryView();
             var countryCovid = covid["Countries"];
@@ -67,7 +68,7 @@ $(document).ready(function () {
             var availableCountry = getAvailableCounty(countryCovid);
             CountryDomE.append(availableCountry);
             getCountryViewO('');
-            CountryDomE.change(function () {
+            CountryDomE.change(function() {
                 getCountryView($(this).val());
             });
             /**
@@ -75,9 +76,9 @@ $(document).ready(function () {
              * @param {countryName} val 
              */
             function getCountryView() {
-                return function (val) {
-                    helper.clearTokenInput(helper.constants.selectors.covidTokenInput,helper.constants.events.clear);
-                    helper.addCss(helper.constants.selectors.inputTokenResult,helper.constants.events.display,helper.constants.events.none);
+                return function(val) {
+                    helper.clearTokenInput(helper.constants.selectors.covidTokenInput, helper.constants.events.clear);
+                    helper.addCss(helper.constants.selectors.inputTokenResult, helper.constants.events.display, helper.constants.events.none);
                     val = val ? val.name : '';
                     if (!val) {
                         if (globalCovid) {
@@ -103,8 +104,45 @@ $(document).ready(function () {
                                 '<tr><td>Total Deaths</td><td class="deaths"> <i class="fa fa-star-half-o" aria-hidden="true"></i> ' + selCountry.TotalDeaths + '</td></tr>' +
                                 '<tr><td>Total Recovered</td><td class="recoverd"><i class="fa fa-heartbeat" aria-hidden="true"></i> ' + selCountry.TotalRecovered + '</td></tr></table>';
                             countryTable.html(countryTableHtml);
+
+
+
+
+                            var dicObj = {
+                                "{newDeath}": selCountry.NewDeaths,
+                                "{NewConfirmed}": selCountry.NewConfirmed,
+                                "{TotalRecovered}": selCountry.TotalRecovered,
+                                "{countryName}": selCountry.Country,
+                                "{countryDate}": (formatAMPM(new Date(selCountry.Date))),
+                                "{totalDeath}": selCountry.TotalDeaths,
+                                "{NewRecovered}": selCountry.NewRecovered,
+                                "{TotalConfirmed}": selCountry.TotalConfirmed,
+                            }
+                            var htmlStr = helper.getHtmlView("#covid-view");
+
+                            var newHtmStr = helper.dictinory(dicObj, htmlStr);
+
+                            helper.setHtmlView("#covid-view", newHtmStr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         }
                     }
+
+
                 }
             }
             /**
@@ -120,7 +158,7 @@ $(document).ready(function () {
                     // return countryDDHtml;
 
                     var countryList = [];
-                    countryCovid.forEach(function (country) {
+                    countryCovid.forEach(function(country) {
                         countryList.push({ id: country.Country, name: country.Country });
                     });
                     helper.plugTokenInput(helper.constants.selectors.covidTokenInput, countryList, getCountryViewO);
@@ -133,13 +171,13 @@ $(document).ready(function () {
              * @param {Country name} countryName 
              */
             function getCovidByCountry(countryName) {
-                return countryCovid.filter(function (e) {
+                return countryCovid.filter(function(e) {
                     if (e.Country === countryName) {
                         return e;
                     }
                 });
             }
-        }).fail(function () {
+        }).fail(function() {
             CovidComponent(helper);
         });
     }
@@ -151,7 +189,7 @@ $(document).ready(function () {
      */
     function getPageNumber(pageTitle) {
         var pageNumber = 0;
-        pagetbl.some(function (e) {
+        pagetbl.some(function(e) {
             if (e && e.pageName.toLocaleLowerCase() === pageTitle.toLocaleLowerCase()) {
                 pageNumner = e.pageNumner;
                 return true;
@@ -182,14 +220,14 @@ $(document).ready(function () {
             /**
              * plug tokeninput jquery when data loaded
              */
-            plugTokenInput: function (inputNameId, data, cbItem) {
+            plugTokenInput: function(inputNameId, data, cbItem) {
                 $(inputNameId).tokenInput(data, {
                     tokenLimit: 1,
                     theme: "facebook",
-                    onAdd: function (item) {
+                    onAdd: function(item) {
                         cbItem(item);
                     },
-                    onDelete: function (item) {
+                    onDelete: function(item) {
 
                     }
                 });
@@ -199,29 +237,40 @@ $(document).ready(function () {
              * @param {*} inputNameId 
              * @param {*} event 
              */
-            clearTokenInput: function(inputNameId,event){
+            clearTokenInput: function(inputNameId, event) {
                 $(inputNameId).tokenInput(event);
-            }, 
+            },
             /**
              * Add css to element
              * @param {*} selector 
              * @param {*} key 
              * @param {*} value 
-             */           
-            addCss: function(selector,key,value){
-                $(selector).css(key,value)
+             */
+            addCss: function(selector, key, value) {
+                $(selector).css(key, value)
             },
             /**
              * validate data is correct
              * @param {data} data 
              */
-            validateDataObj: function (data) {
+            validateDataObj: function(data) {
                 if (typeof data === 'string') {
                     if (data != null && data != undefined && data != '') {
                         return true;
                     }
                 }
                 return false;
+            },
+
+            dictinory: function(dicArr, str) {
+                return str.replace(/[a-z]/gi, m => dicArr[m]);
+            },
+
+            getHtmlView: function(selector) {
+                return $(selector).html();
+            },
+            setHtmlView: function(selector, html) {
+                return $(selector).html(html);
             },
             /**
              * helper constants
@@ -231,11 +280,11 @@ $(document).ready(function () {
                     covid: 'https://api.covid19api.com/summary',
                     ip: 'https://api.ipify.org?format=json'
                 },
-                selectors:{
+                selectors: {
                     covidTokenInput: '#CountryDD',
                     inputTokenResult: '.token-input-dropdown-facebook'
                 },
-                events:{
+                events: {
                     clear: 'clear',
                     display: 'display',
                     none: 'none'
