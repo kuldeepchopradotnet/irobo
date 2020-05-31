@@ -263,7 +263,12 @@ $(document).ready(function() {
             },
 
             dictinory: function(dicArr, str) {
-                return str.replace(/[a-z]/gi, m => dicArr[m]);
+
+                var re = new RegExp(Object.keys(dicArr).join("|"), "ig");
+                return str.replace(re, function(m) {
+                    return dictionary[m];
+                });
+                //return str.replace(/[a-z]/gi, m => dicArr[m]);
             },
 
             getHtmlView: function(selector) {
