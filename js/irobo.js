@@ -88,14 +88,14 @@ $(document).ready(function() {
                     }
                     if (countryO) {
                         var dicObj = {
-                            "{newDeath}": countryO.NewDeaths,
-                            "{NewConfirmed}": countryO.NewConfirmed,
-                            "{TotalRecovered}": countryO.TotalRecovered,
+                            "{newDeath}": helper.numberFormatter(countryO.NewDeaths),
+                            "{NewConfirmed}": helper.numberFormatter(countryO.NewConfirmed),
+                            "{TotalRecovered}": helper.numberFormatter(countryO.TotalRecovered),
                             "{countryName}": countryO.Country,
                             "{countryDate}": (formatAMPM(new Date(countryO.Date))),
-                            "{totalDeath}": countryO.TotalDeaths,
-                            "{NewRecovered}": countryO.NewRecovered,
-                            "{TotalConfirmed}": countryO.TotalConfirmed,
+                            "{totalDeath}": helper.numberFormatter(countryO.TotalDeaths),
+                            "{NewRecovered}": helper.numberFormatter(countryO.NewRecovered),
+                            "{TotalConfirmed}": helper.numberFormatter(countryO.TotalConfirmed)
                         }
                         var htmlStr;
                         if (tempTemplate) {
@@ -241,6 +241,17 @@ $(document).ready(function() {
                     this.addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.none);
                     $(this.constants.selectors.pagesBlur).removeClass(this.constants.class.blur);
                 }
+            },
+            numberFormatter: function(nStr) {
+                nStr += '';
+                x = nStr.split('.');
+                x1 = x[0];
+                x2 = x.length > 1 ? '.' + x[1] : '';
+                var rgx = /(\d+)(\d{3})/;
+                while (rgx.test(x1)) {
+                    x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                }
+                return x1 + x2;
             },
             /**
              * helper constants
