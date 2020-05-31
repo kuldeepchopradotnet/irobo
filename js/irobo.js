@@ -84,6 +84,7 @@ $(document).ready(function() {
                     if (!val) {
                         countryO = globalCovid;
                         countryO["Country"] = "Global"
+                        countryO["Date"] = covid.Date
                     } else {
                         var selCountry = getCovidByCountry(val);
                         countryO = selCountry ? selCountry[0] : null;
