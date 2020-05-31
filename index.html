@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/irobo.js"></script>
     <link rel="stylesheet" href="css/token-input.css" type="text/css" />
@@ -34,28 +35,30 @@
                                 </div>
                             </div>
 
-                            <table class="table table-hover small">
-                                <tbody>
-                                    <tr class="text-danger">
-                                        <td><i class="fa fa-star-half-o" aria-hidden="true"></i> New Deaths</td>
-                                        <td>{newDeath}</td>
-                                        <td><i class="fa fa-star-half-o" aria-hidden="true"></i> Total Deaths</td>
-                                        <td>{totalDeath}</td>
-                                    </tr>
-                                    <tr class="text-warning">
-                                        <td><i class="fa fa-medkit" aria-hidden="true"></i> New Confirmed</td>
-                                        <td>{NewConfirmed}</td>
-                                        <td><i class="fa fa-medkit" aria-hidden="true"></i> Total Confirmed</td>
-                                        <td>{TotalConfirmed}</td>
-                                    </tr>
-                                    <tr class="text-success">
-                                        <td><i class="fa fa-heartbeat" aria-hidden="true"></i> New Recovered</td>
-                                        <td>{NewRecovered}</td>
-                                        <td><i class="fa fa-heartbeat" aria-hidden="true"></i> Total Recovered</td>
-                                        <td>{TotalRecovered}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <!-- <table class="table table-hover small">
+                                <tbody> -->
+                            <div class="container small">
+                                <div class="row text-danger mb-4 border border-top-0 border-right-0 border-left-0 pb-3">
+                                    <div class="col-sm-3"><i class="fa fa-star-half-o" aria-hidden="true"></i> New Deaths</div>
+                                    <div class="col-sm-3">{newDeath}</div>
+                                    <div class="col-sm-3"><i class="fa fa-star-half-o" aria-hidden="true"></i> Total Deaths</div>
+                                    <div class="col-sm-3">{totalDeath}</div>
+                                </div>
+                                <div class="row text-warning mb-4 border border-top-0 border-right-0 border-left-0 pb-3">
+                                    <div class="col-sm-3"><i class="fa fa-medkit" aria-hidden="true"></i> New Confirmed</div>
+                                    <div class="col-sm-3">{NewConfirmed}</div>
+                                    <div class="col-sm-3"><i class="fa fa-medkit" aria-hidden="true"></i> Total Confirmed</div>
+                                    <div class="col-sm-3">{TotalConfirmed}</div>
+                                </div>
+                                <div class="row text-success mb-4 border border-top-0 border-right-0 border-left-0 pb-3">
+                                    <div class="col-sm-3"><i class="fa fa-heartbeat" aria-hidden="true"></i> New Recovered</div>
+                                    <div class="col-sm-3">{NewRecovered}</div>
+                                    <div class="col-sm-3"><i class="fa fa-heartbeat" aria-hidden="true"></i> Total Recovered</div>
+                                    <div class="col-sm-3">{TotalRecovered}</div>
+                                </div>
+                            </div>
+                            <!-- </tbody>
+                            </table> -->
                         </div>
                         <div class="col-sm-12 text-center text-uppercase p-2 bg-info text-white">
                             <i class="fa fa-thumbs-up" aria-hidden="true"></i> Things to take care</div>
