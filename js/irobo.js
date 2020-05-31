@@ -266,7 +266,7 @@ $(document).ready(function() {
 
                 var re = new RegExp(Object.keys(dicArr).join("|"), "ig");
                 return str.replace(re, function(m) {
-                    return dictionary[m];
+                    return dicArr[m];
                 });
                 //return str.replace(/[a-z]/gi, m => dicArr[m]);
             },
