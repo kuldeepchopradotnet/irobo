@@ -80,69 +80,29 @@ $(document).ready(function() {
                     helper.clearTokenInput(helper.constants.selectors.covidTokenInput, helper.constants.events.clear);
                     helper.addCss(helper.constants.selectors.inputTokenResult, helper.constants.events.display, helper.constants.events.none);
                     val = val ? val.name : '';
+                    var countryO = null;
                     if (!val) {
-                        if (globalCovid) {
-                            var countryTableHtml = '<table><tr><td>Date</td><td>' + (formatAMPM(new Date(covid.Date))) + '</td></tr>' +
-                                '<tr><td>New Confirmed</td><td>' + globalCovid.NewConfirmed.toString() + '</td></tr>' +
-                                '<tr><td>New Deaths</td><td>' + globalCovid.NewDeaths + '</td></tr>' +
-                                '<tr><td>New Recovered</td><td>' + globalCovid.NewRecovered + '</td></tr>' +
-                                '<tr><td>Total Confirmed</td><td class="confirmed"><i class="fa fa-medkit" aria-hidden="true"></i> ' + globalCovid.TotalConfirmed + '</td></tr>' +
-                                '<tr><td>Total Deaths</td><td td class="deaths"><i class="fa fa-star-half-o" aria-hidden="true"></i> ' + globalCovid.TotalDeaths + '</td></tr>' +
-                                '<tr><td>Total Recovered</td><td class="recoverd"><i class="fa fa-heartbeat" aria-hidden="true"></i> ' + globalCovid.TotalRecovered + '</td></tr></table>';
-                            countryTable.html(countryTableHtml);
-                        }
+                        countryO = globalCovid;
+                        countryO[""] = "Global"
                     } else {
                         var selCountry = getCovidByCountry(val);
-                        selCountry = selCountry ? selCountry[0] : null;
-                        if (selCountry) {
-                            var countryTableHtml = '<table><tr><td>Date</td><td>' + (formatAMPM(new Date(selCountry.Date))) + '</td></tr>' +
-                                '<tr><td> Country</td><td class="country"><i class="fa fa-flag-checkered" aria-hidden="true"></i> ' + selCountry.Country + '</td></tr>' +
-                                '<tr><td>New Confirmed</td><td>' + selCountry.NewConfirmed.toString() + '</td></tr>' +
-                                '<tr><td>New Deaths</td><td>' + selCountry.NewDeaths + '</td></tr>' +
-                                '<tr><td>New Recovered</td><td>' + selCountry.NewRecovered + '</td></tr>' +
-                                '<tr><td>Total Confirmed</td><td class="confirmed"><i class="fa fa-medkit" aria-hidden="true"></i> ' + selCountry.TotalConfirmed + '</td></tr>' +
-                                '<tr><td>Total Deaths</td><td class="deaths"> <i class="fa fa-star-half-o" aria-hidden="true"></i> ' + selCountry.TotalDeaths + '</td></tr>' +
-                                '<tr><td>Total Recovered</td><td class="recoverd"><i class="fa fa-heartbeat" aria-hidden="true"></i> ' + selCountry.TotalRecovered + '</td></tr></table>';
-                            countryTable.html(countryTableHtml);
-
-
-
-
-                            var dicObj = {
-                                "{newDeath}": selCountry.NewDeaths,
-                                "{NewConfirmed}": selCountry.NewConfirmed,
-                                "{TotalRecovered}": selCountry.TotalRecovered,
-                                "{countryName}": selCountry.Country,
-                                "{countryDate}": (formatAMPM(new Date(selCountry.Date))),
-                                "{totalDeath}": selCountry.TotalDeaths,
-                                "{NewRecovered}": selCountry.NewRecovered,
-                                "{TotalConfirmed}": selCountry.TotalConfirmed,
-                            }
-                            var htmlStr = helper.getHtmlView("#covid-view");
-
-                            var newHtmStr = helper.dictinory(dicObj, htmlStr);
-
-                            helper.setHtmlView("#covid-view", newHtmStr);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
+                        countryO = selCountry ? selCountry[0] : null;
                     }
-
-
+                    if (countryO) {
+                        var dicObj = {
+                            "{newDeath}": selCountry.NewDeaths,
+                            "{NewConfirmed}": selCountry.NewConfirmed,
+                            "{TotalRecovered}": selCountry.TotalRecovered,
+                            "{countryName}": selCountry.Country,
+                            "{countryDate}": (formatAMPM(new Date(selCountry.Date))),
+                            "{totalDeath}": selCountry.TotalDeaths,
+                            "{NewRecovered}": selCountry.NewRecovered,
+                            "{TotalConfirmed}": selCountry.TotalConfirmed,
+                        }
+                        var htmlStr = helper.getHtmlView("#covid-view");
+                        var newHtmStr = helper.dictinory(dicObj, htmlStr);
+                        helper.setHtmlView("#covid-view", newHtmStr);
+                    }
                 }
             }
             /**
