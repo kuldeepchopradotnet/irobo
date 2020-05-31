@@ -22,3 +22,8 @@ select#CountryDD {
     filter: blur(8px);
     -webkit-filter: blur(8px);
 }
+
+aside.sidebar-container.container.sidebar-invisible {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
