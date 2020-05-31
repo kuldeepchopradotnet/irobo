@@ -17,8 +17,10 @@ $(document).ready(function() {
      * find my ip component
      */
     function IpComponent() {
-        var html = '<h3>Your ip address is : {ip}<h3>';
+        helper.loader(helper.constants.toggle.on);
+        var html = '<h3> {ip}<h3>';
         $.getJSON(helper.constants.apis.ip, function(data) {
+            helper.loader(helper.constants.toggle.off);
             html = html.replace('{ip}', (data.ip ? data.ip : ''));
             helper.setHtmlView(helper.constants.selectors.ipAddress, html);
         });
