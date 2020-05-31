@@ -241,9 +241,13 @@ $(document).ready(function() {
             },
 
             loader: function(toggle) {
-                toggle === 'on' ?
-                    this.addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.block) :
+                if (toggle === 'on') {
+                    this.addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.block);
+                    $(this.constants.selectors.pagesBlur).addClass(this.constants.class.blur);
+                } else {
                     this.addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.none);
+                    $(this.constants.selectors.pagesBlur).removeClass(this.constants.class.blur);
+                }
             },
             /**
              * helper constants
@@ -256,7 +260,8 @@ $(document).ready(function() {
                 selectors: {
                     covidTokenInput: '#CountryDD',
                     inputTokenResult: '.token-input-dropdown-facebook',
-                    loader: '#loader-grow'
+                    loader: '#loader-grow',
+                    pagesBlur: '.page'
                 },
                 events: {
                     clear: 'clear',
@@ -267,6 +272,9 @@ $(document).ready(function() {
                 toggle: {
                     on: "on",
                     off: "off"
+                },
+                class: {
+                    blur: "page-blur"
                 }
             }
         }

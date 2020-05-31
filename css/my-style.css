@@ -17,3 +17,8 @@
 select#CountryDD {
     color: black;
 }
+
+.page-blur {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
