@@ -20,7 +20,7 @@ $(document).ready(function() {
         var html = '<h3>Your ip address is : {ip}<h3>';
         $.getJSON(helper.constants.apis.ip, function(data) {
             html = html.replace('{ip}', (data.ip ? data.ip : ''));
-            //postBody.html(html);
+            helper.setHtmlView(helper.constants.selectors.ipAddress, html);
         });
     }
 
@@ -241,7 +241,8 @@ $(document).ready(function() {
                     inputTokenResult: '.token-input-dropdown-facebook',
                     loader: '#loader-grow',
                     pagesBlur: '.page',
-                    pageId: "#pageIdTitle"
+                    pageId: "#pageIdTitle",
+                    ipAddress: '#myIPAddress'
                 },
                 events: {
                     clear: 'clear',
