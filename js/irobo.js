@@ -242,8 +242,8 @@ $(document).ready(function() {
 
             loader: function(toggle) {
                 toggle === 'on' ?
-                    addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.block) :
-                    addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.none);
+                    this.addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.block) :
+                    this.addCss(this.constants.selectors.loader, this.constants.events.display, this.constants.events.none);
             },
             /**
              * helper constants
