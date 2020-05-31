@@ -73,8 +73,8 @@ $(document).ready(function() {
              */
             function getCountryView() {
                 return function(val) {
-                    helper.clearTokenInput(helper.constants.selectors.covidTokenInput, helper.constants.events.clear);
-                    helper.addCss(helper.constants.selectors.inputTokenResult, helper.constants.events.display, helper.constants.events.none);
+                    //helper.clearTokenInput(helper.constants.selectors.covidTokenInput, helper.constants.events.clear);
+                    //helper.addCss(helper.constants.selectors.inputTokenResult, helper.constants.events.display, helper.constants.events.none);
                     val = val ? val.name : '';
                     var countryO = null;
                     if (!val) {
