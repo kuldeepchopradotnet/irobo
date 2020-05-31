@@ -15,7 +15,7 @@
 
 <body>
     <!-- hello world -->
-    <div class="container" id="covid-view">
+    <div class="container">
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
@@ -25,38 +25,38 @@
                             <label for="CountryDD">Country: </label>
                             <input type="text" class="form-control" id="CountryDD" placeholder="Enter Country" name="CountryDD">
                         </div>
+                        <div id="covid-view">
+                            <div class="col-sm-12 text-center text-uppercase p-2 bg-info text-white">
+                                <i class="fa fa-flag-checkered" aria-hidden="true"></i> {countryName}</div>
 
-                        <div class="col-sm-12 text-center text-uppercase p-2 bg-info text-white">
-                            <i class="fa fa-flag-checkered" aria-hidden="true"></i> {countryName}</div>
-
-                        <div class="row mb-3">
-                            <div class="col-sm-12 text-center text-muted"> <small>{countryDate}</small>
+                            <div class="row mb-3">
+                                <div class="col-sm-12 text-center text-muted"> <small>{countryDate}</small>
+                                </div>
                             </div>
+
+                            <table class="table table-hover small">
+                                <tbody>
+                                    <tr class="text-danger">
+                                        <td><i class="fa fa-star-half-o" aria-hidden="true"></i> New Deaths</td>
+                                        <td>{newDeath}</td>
+                                        <td><i class="fa fa-star-half-o" aria-hidden="true"></i> Total Deaths</td>
+                                        <td>{totalDeath}</td>
+                                    </tr>
+                                    <tr class="text-warning">
+                                        <td><i class="fa fa-medkit" aria-hidden="true"></i> New Confirmed</td>
+                                        <td>{NewConfirmed}</td>
+                                        <td><i class="fa fa-medkit" aria-hidden="true"></i> Total Confirmed</td>
+                                        <td>{TotalConfirmed}</td>
+                                    </tr>
+                                    <tr class="text-success">
+                                        <td><i class="fa fa-heartbeat" aria-hidden="true"></i> New Recovered</td>
+                                        <td>{NewRecovered}</td>
+                                        <td><i class="fa fa-heartbeat" aria-hidden="true"></i> Total Recovered</td>
+                                        <td>{TotalRecovered}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-
-                        <table class="table table-hover small">
-                            <tbody>
-                                <tr class="text-danger">
-                                    <td><i class="fa fa-star-half-o" aria-hidden="true"></i> New Deaths</td>
-                                    <td>{newDeath}</td>
-                                    <td><i class="fa fa-star-half-o" aria-hidden="true"></i> Total Deaths</td>
-                                    <td>{totalDeath}</td>
-                                </tr>
-                                <tr class="text-warning">
-                                    <td><i class="fa fa-medkit" aria-hidden="true"></i> New Confirmed</td>
-                                    <td>{NewConfirmed}</td>
-                                    <td><i class="fa fa-medkit" aria-hidden="true"></i> Total Confirmed</td>
-                                    <td>{TotalConfirmed}</td>
-                                </tr>
-                                <tr class="text-success">
-                                    <td><i class="fa fa-heartbeat" aria-hidden="true"></i> New Recovered</td>
-                                    <td>{NewRecovered}</td>
-                                    <td><i class="fa fa-heartbeat" aria-hidden="true"></i> Total Recovered</td>
-                                    <td>{TotalRecovered}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
                         <div class="col-sm-12 text-center text-uppercase p-2 bg-info text-white">
                             <i class="fa fa-thumbs-up" aria-hidden="true"></i> Things to take care</div>
 
@@ -64,9 +64,12 @@
                             <a href="#" class="list-group-item list-group-item-action">
                                 <i class="fa fa-home" aria-hidden="true"></i> During this covid-19 pandemic try to stay home.
                             </a>
-                            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-users" aria-hidden="true"></i> Keep social distance.</a>
-                            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-sign-language" aria-hidden="true"></i> Wash and sanitize your hands regularly.</a>
-                            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-thermometer-half" aria-hidden="true"></i> Eat Healthy and Improve your immunity.</a>
+                            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-users"
+                                    aria-hidden="true"></i> Keep social distance.</a>
+                            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-sign-language"
+                                    aria-hidden="true"></i> Wash and sanitize your hands regularly.</a>
+                            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-thermometer-half"
+                                    aria-hidden="true"></i> Eat Healthy and Improve your immunity.</a>
                         </div>
 
 

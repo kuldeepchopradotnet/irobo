@@ -55,6 +55,7 @@ $(document).ready(function() {
      * helper dependancy
      */
     function CovidComponent(helper) {
+        var tempTemplate;
         /**
          * Get CovidData
          */
@@ -73,8 +74,8 @@ $(document).ready(function() {
              */
             function getCountryView() {
                 return function(val) {
-                    //helper.clearTokenInput(helper.constants.selectors.covidTokenInput, helper.constants.events.clear);
-                    //helper.addCss(helper.constants.selectors.inputTokenResult, helper.constants.events.display, helper.constants.events.none);
+                    helper.clearTokenInput(helper.constants.selectors.covidTokenInput, helper.constants.events.clear);
+                    helper.addCss(helper.constants.selectors.inputTokenResult, helper.constants.events.display, helper.constants.events.none);
                     val = val ? val.name : '';
                     var countryO = null;
                     if (!val) {
@@ -96,7 +97,13 @@ $(document).ready(function() {
                             "{NewRecovered}": countryO.NewRecovered,
                             "{TotalConfirmed}": countryO.TotalConfirmed,
                         }
-                        var htmlStr = helper.getHtmlView("#covid-view");
+                        var htmlStr;
+                        if (tempTemplate) {
+                            htmlStr = tempTemplate;
+                        } else {
+                            tempTemplate = helper.getHtmlView("#covid-view");
+                            htmlStr = tempTemplate;
+                        }
                         var newHtmStr = helper.dictinory(dicObj, htmlStr);
                         helper.setHtmlView("#covid-view", newHtmStr);
                     }
@@ -261,7 +268,8 @@ $(document).ready(function() {
                 },
                 class: {
                     blur: "page-blur"
-                }
+                },
+                tempStore: ''
             }
         }
     }
