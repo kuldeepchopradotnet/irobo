@@ -241,7 +241,7 @@ $(document).ready(function() {
                     inputTokenResult: '.token-input-dropdown-facebook',
                     loader: '#loader-grow',
                     pagesBlur: '.page',
-                    pageId: "#pageId"
+                    pageId: "#pageIdTitle"
                 },
                 events: {
                     clear: 'clear',
