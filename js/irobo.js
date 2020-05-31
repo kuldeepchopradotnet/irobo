@@ -1,39 +1,13 @@
 $(document).ready(function() {
     /**
-     * Page title
+     * load Dependancies
      */
-    var pageTitle = $(".post-title.entry-title");
-    var postBody = '';
-    pageTitle = pageTitle.length > 0 ? pageTitle.get(0).textContent.trim() : '';
-
+    var helper = helper();
     /**
-     * Pages/Post list 
-     * start
+     * open component
      */
-    var pagetbl = [{
-            pageName: 'what is my ip address',
-            pageNumner: 1
-        },
-        {
-            pageName: 'covid-19 update',
-            pageNumner: 2
-        }
-    ];
-
-    var pageNumner = getPageNumber(pageTitle);
-    postBody = pageNumner > 0 ? $(".post-body.entry-content") : '';
-    switch (pageNumner) {
-        case 1:
-            IpComponent();
-            break;
-        case 2:
-            var helper = helper();
-            CovidComponent(helper);
-            break;
-        case 3:
-            break
-
-    }
+    var pageId = helper.getSelectorValue(helper.constants.selectors.pageId);
+    helper.openComponent(pageId);
 
     /**
      * All page function as components listed here
@@ -46,7 +20,7 @@ $(document).ready(function() {
         var html = '<h3>Your ip address is : {ip}<h3>';
         $.getJSON(helper.constants.apis.ip, function(data) {
             html = html.replace('{ip}', (data.ip ? data.ip : ''));
-            postBody.html(html);
+            //postBody.html(html);
         });
     }
 
@@ -139,20 +113,6 @@ $(document).ready(function() {
     }
     /*All common function listed here*/
 
-    /**
-     * Get Page Number 
-     * @param {page name or title} pageTitle 
-     */
-    function getPageNumber(pageTitle) {
-        var pageNumber = 0;
-        pagetbl.some(function(e) {
-            if (e && e.pageName.toLocaleLowerCase() === pageTitle.toLocaleLowerCase()) {
-                pageNumner = e.pageNumner;
-                return true;
-            }
-        });
-        return pageNumner;
-    }
     /**
      * Get formatted date
      * @param {Date} date 
@@ -253,6 +213,21 @@ $(document).ready(function() {
                 }
                 return x1 + x2;
             },
+            getSelectorValue: function(selector) {
+                return $(selector).val();
+            },
+            openComponent: function(pageId) {
+                switch (pageId) {
+                    case this.constants.pages.myIp:
+                        IpComponent();
+                        break;
+                    case this.constants.pages.covid:
+                        CovidComponent(helper);
+                        break;
+                    case '':
+                        break
+                }
+            },
             /**
              * helper constants
              */
@@ -265,7 +240,8 @@ $(document).ready(function() {
                     covidTokenInput: '#CountryDD',
                     inputTokenResult: '.token-input-dropdown-facebook',
                     loader: '#loader-grow',
-                    pagesBlur: '.page'
+                    pagesBlur: '.page',
+                    pageId: "#pageId"
                 },
                 events: {
                     clear: 'clear',
@@ -280,7 +256,10 @@ $(document).ready(function() {
                 class: {
                     blur: "page-blur"
                 },
-                tempStore: ''
+                pages: {
+                    covid: 'covid-19',
+                    myIp: 'myIp'
+                }
             }
         }
     }
